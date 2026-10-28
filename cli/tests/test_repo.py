@@ -230,12 +230,15 @@ def test_scan_org_policies_treat_foreign_custom_as_undeclared(repo):
 
 
 _MODERATE_GATED = "compute.managed.restrictProtocolForwardingCreationForTypes"
+_IL_GATED = "compute.requireOsLogin"
 
 
 def test_declared_org_policies_follow_the_regime(repo):
     every = set(repo.declared_org_policies())
     moderate = set(repo.declared_org_policies("FEDRAMP_MODERATE"))
-    assert set(repo.declared_org_policies("IL5")) == every
+    assert set(repo.declared_org_policies("FEDRAMP_HIGH")) == every
+    assert set(repo.declared_org_policies("IL4")) == every - {_IL_GATED}
+    assert set(repo.declared_org_policies("IL5")) == every - {_IL_GATED}
     assert _MODERATE_GATED in every - moderate
     # The FedRAMP Moderate branch of an if and else pair still counts.
     assert "gcp.resourceLocations" in moderate
