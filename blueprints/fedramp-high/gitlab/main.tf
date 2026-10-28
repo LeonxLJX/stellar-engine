@@ -50,10 +50,10 @@ resource "google_project_iam_member" "gke_host_agent_use" {
 
 resource "google_project_iam_member" "compute_agent_subnet_user" {
   for_each = {
-    compute_agent = "serviceAccount:service-${data.google_project.project.number}@compute-system.iam.gserviceaccount.com"
-    gke_agent     = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-    cloudservices = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
-    gitlab_sa     = "serviceAccount:${google_service_account.gitlab_sa.email}"
+    compute_agent  = "serviceAccount:service-${data.google_project.project.number}@compute-system.iam.gserviceaccount.com"
+    gke_agent      = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+    cloudservices  = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
+    gitlab_sa      = "serviceAccount:${google_service_account.gitlab_sa.email}"
     gitlab_node_sa = "serviceAccount:${google_service_account.gitlab_node_sa.email}"
   }
   project = var.net_project
@@ -63,10 +63,10 @@ resource "google_project_iam_member" "compute_agent_subnet_user" {
 
 resource "google_kms_crypto_key_iam_member" "compute_service_agent_kms_permissions" {
   for_each = {
-    compute_agent = "serviceAccount:service-${data.google_project.project.number}@compute-system.iam.gserviceaccount.com"
-    gke_agent     = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
-    cloudservices = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
-    gitlab_sa     = "serviceAccount:${google_service_account.gitlab_sa.email}"
+    compute_agent  = "serviceAccount:service-${data.google_project.project.number}@compute-system.iam.gserviceaccount.com"
+    gke_agent      = "serviceAccount:service-${data.google_project.project.number}@container-engine-robot.iam.gserviceaccount.com"
+    cloudservices  = "serviceAccount:${data.google_project.project.number}@cloudservices.gserviceaccount.com"
+    gitlab_sa      = "serviceAccount:${google_service_account.gitlab_sa.email}"
     gitlab_node_sa = "serviceAccount:${google_service_account.gitlab_node_sa.email}"
   }
   crypto_key_id = var.kms_key
