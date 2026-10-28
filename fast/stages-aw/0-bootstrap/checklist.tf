@@ -135,6 +135,8 @@ module "automation-tf-checklist-gcs" {
   location      = local.locations.gcs
   storage_class = local.gcs_storage_class
   versioning    = true
+  force_destroy = var.force_destroy
+  encryption_key = "projects/${module.automation-project.project_id}/locations/${local.locations.gcs}/keyRings/gcs/cryptoKeys/gcs"
   depends_on    = [module.organization]
 }
 

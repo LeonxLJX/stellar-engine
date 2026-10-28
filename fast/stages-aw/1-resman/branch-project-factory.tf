@@ -111,6 +111,8 @@ module "branch-pf-dev-gcs" {
   location      = var.regions.primary
   storage_class = local.gcs_storage_class
   versioning    = true
+  force_destroy = var.force_destroy
+  encryption_key = "projects/${var.automation.project_id}/locations/${var.regions.primary}/keyRings/gcs/cryptoKeys/gcs"
   iam = {
     "roles/storage.objectAdmin"  = [module.branch-pf-dev-sa[0].iam_email]
     "roles/storage.objectViewer" = [module.branch-pf-dev-r-sa[0].iam_email]
@@ -126,6 +128,8 @@ module "branch-pf-prod-gcs" {
   location      = var.regions.primary
   storage_class = local.gcs_storage_class
   versioning    = true
+  force_destroy = var.force_destroy
+  encryption_key = "projects/${var.automation.project_id}/locations/${var.regions.primary}/keyRings/gcs/cryptoKeys/gcs"
   iam = {
     "roles/storage.objectAdmin"  = [module.branch-pf-prod-sa[0].iam_email]
     "roles/storage.objectViewer" = [module.branch-pf-prod-r-sa[0].iam_email]
