@@ -86,3 +86,9 @@ variable "storage_utilization_percent" {
   type        = number
   default     = 90
 }
+
+variable "kms_key_name" {
+  description = "Fully qualified KMS crypto key self link for CMEK encryption of Spanner instance."
+  type        = string
+  default     = null
+}
