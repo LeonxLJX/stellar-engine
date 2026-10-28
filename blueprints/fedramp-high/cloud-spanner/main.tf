@@ -24,9 +24,9 @@ moved {
 }
 
 module "cloud-spanner" {
-  source     = "../../../modules/spanner-instance-se"
-  project_id = var.main_project_id
-  edition    = var.edition
+  source       = "../../../modules/spanner-instance-se"
+  project_id   = var.main_project_id
+  edition      = var.edition
   kms_key_name = var.kms_key_name
   instance = {
     name         = var.instance_name
