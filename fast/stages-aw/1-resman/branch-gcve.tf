@@ -153,15 +153,15 @@ module "branch-gcve-prod-r-sa" {
 # automation buckets
 
 module "branch-gcve-dev-gcs" {
-  source        = "../../../modules/gcs"
-  count         = var.fast_features.gcve ? 1 : 0
-  project_id    = var.automation.project_id
-  name          = "dev-resman-gcve-0"
-  prefix        = var.prefix
-  location      = var.regions.primary
-  storage_class = local.gcs_storage_class
-  versioning    = true
-  force_destroy = var.force_destroy
+  source         = "../../../modules/gcs"
+  count          = var.fast_features.gcve ? 1 : 0
+  project_id     = var.automation.project_id
+  name           = "dev-resman-gcve-0"
+  prefix         = var.prefix
+  location       = var.regions.primary
+  storage_class  = local.gcs_storage_class
+  versioning     = true
+  force_destroy  = var.force_destroy
   encryption_key = "projects/${var.automation.project_id}/locations/${var.regions.primary}/keyRings/gcs/cryptoKeys/gcs"
   iam = {
     "roles/storage.objectAdmin"  = [module.branch-gcve-dev-sa[0].iam_email]
@@ -170,15 +170,15 @@ module "branch-gcve-dev-gcs" {
 }
 
 module "branch-gcve-prod-gcs" {
-  source        = "../../../modules/gcs"
-  count         = var.fast_features.gcve ? 1 : 0
-  project_id    = var.automation.project_id
-  name          = "prod-resman-gcve-0"
-  prefix        = var.prefix
-  location      = var.regions.primary
-  storage_class = local.gcs_storage_class
-  versioning    = true
-  force_destroy = var.force_destroy
+  source         = "../../../modules/gcs"
+  count          = var.fast_features.gcve ? 1 : 0
+  project_id     = var.automation.project_id
+  name           = "prod-resman-gcve-0"
+  prefix         = var.prefix
+  location       = var.regions.primary
+  storage_class  = local.gcs_storage_class
+  versioning     = true
+  force_destroy  = var.force_destroy
   encryption_key = "projects/${var.automation.project_id}/locations/${var.regions.primary}/keyRings/gcs/cryptoKeys/gcs"
   iam = {
     "roles/storage.objectAdmin"  = [module.branch-gcve-prod-sa[0].iam_email]
