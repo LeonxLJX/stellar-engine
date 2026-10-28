@@ -1,6 +1,24 @@
 # Changelog
 
 
+## [5.2.0](https://github.com/google/stellar-engine/compare/v5.1.1...v5.2.0) (2026-10-28)
+
+
+### Features
+
+* **1-resman:** support project organization policy overrides ([#294](https://github.com/google/stellar-engine/issues/294)) ([db8271c](https://github.com/google/stellar-engine/commit/db8271cffaaf840f87017f8caa1718d7a53b08c7))
+  * Add `org_policies = optional(string, "data/org-policies")` to `var.factories_config` in `fast/stages-aw/1-resman/variables.tf` to support project-scoped organization policy YAML factories, fixing #14.
+* **cli:** configure and render stages 0 and 1 ([#357](https://github.com/google/stellar-engine/issues/357)) ([f68b707](https://github.com/google/stellar-engine/commit/f68b70746f3df790fd342d2e399e1559cd9a0cd8))
+  * Record the answers of a deployment once and render ready-to-run Terraform workspaces for the `0-bootstrap` and `1-resman` stages, so operators stop copying samples and editing tfvars by hand.
+
+
+### Bug Fixes
+
+* **blueprints:** apply fedramp-high/gitlab GKE control plane and node settings ([#345](https://github.com/google/stellar-engine/issues/345)) ([2be6eae](https://github.com/google/stellar-engine/commit/2be6eae2b5a1108157c1da4553f8838e9fc7cd87))
+  * The `blueprints/fedramp-high/gitlab/` blueprint now authorizes the internal `10.203.0.0/16` range on the private GKE control plane endpoint and runs its node pool as Confidential GKE Nodes, as the cluster call always intended.
+* **blueprints:** apply il5/gke-hardened CIS node settings ([#344](https://github.com/google/stellar-engine/issues/344)) ([46e268e](https://github.com/google/stellar-engine/commit/46e268e3d5601a23cf484b9b2e7eacb5fe829028))
+  * The `il5/gke-hardened` blueprint now applies the CIS node hardening it documents.
+
 ## [5.1.1](https://github.com/google/stellar-engine/compare/v5.1.0...v5.1.1) (2026-10-26)
 
 
