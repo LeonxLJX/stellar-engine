@@ -69,7 +69,7 @@ def test_required_roles_match_ddg(repo):
 
 def test_required_apis(repo):
     apis = repo.required_apis()
-    assert "cloudresourcemanager.googleapis.com" in apis
+    assert {"cloudresourcemanager.googleapis.com"} <= set(apis)
     assert all(api.endswith(".googleapis.com") for api in apis)
 
 
@@ -80,7 +80,9 @@ def test_prerequisites_doc_lists_every_script_api(repo):
 
 
 def test_ddg_requires_monitoring_api(repo):
-    assert "monitoring.googleapis.com" in _ddg_prerequisites(repo.root)
+    assert "/apis/api/monitoring.googleapis.com/overview" in _ddg_prerequisites(
+        repo.root
+    )
     assert checks.EXTRA_APIS == ("monitoring.googleapis.com",)
 
 
@@ -230,12 +232,15 @@ def test_scan_org_policies_treat_foreign_custom_as_undeclared(repo):
 
 
 _MODERATE_GATED = "compute.managed.restrictProtocolForwardingCreationForTypes"
+_IL_GATED = "compute.requireOsLogin"
 
 
 def test_declared_org_policies_follow_the_regime(repo):
     every = set(repo.declared_org_policies())
     moderate = set(repo.declared_org_policies("FEDRAMP_MODERATE"))
-    assert set(repo.declared_org_policies("IL5")) == every
+    assert set(repo.declared_org_policies("FEDRAMP_HIGH")) == every
+    assert set(repo.declared_org_policies("IL4")) == every - {_IL_GATED}
+    assert set(repo.declared_org_policies("IL5")) == every - {_IL_GATED}
     assert _MODERATE_GATED in every - moderate
     # The FedRAMP Moderate branch of an if and else pair still counts.
     assert "gcp.resourceLocations" in moderate
